@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const User = require("./models/User");
-const List = require("./models/List");
-const Song = require("./models/Song");
-const Artist = require("./models/Artist");
+const estudiante = require("./models/estudiante");
+const subtemas = require("./models/subtemas");
+const temas = require("./models/temas");
 
 class Controller {
     constructor() {
@@ -56,93 +56,93 @@ class Controller {
             if (err) throw err;
             res.send({ message: "User has been deleted" });
         });
-    }     setUserList(user_id, list, res) {
-        list.user_id = user_id;
-        List.create(list, function(err, newList) {
+    }     setUserestudiante(user_id, estudiante, res) {
+        estudiante.user_id = user_id;
+        estudiante.create(estudiante, function(err, newestudiante) {
             if (err) return handleError(err);
-            res.send({ status: 200, id_list: newList._id });
+            res.send({ status: 200, id_estudiante: newestudiante._id });
         });
     }
 
-    getUserLists(id, res) {
-        List.find({ user_id: id }, function(err, userList) {
+    getUserestudiantes(id, res) {
+        estudiante.find({ user_id: id }, function(err, userestudiante) {
             if (err) throw err;
-            res.send({ status: 200, user_list: userList });
+            res.send({ status: 200, user_estudiante: userestudiante });
         });
     }
 
-    getUserList(user_id, list_id, res) {
-        List.find({ _id: list_id, user_id: user_id })
+    getUserestudiante(user_id, estudiante_id, res) {
+        estudiante.find({ _id: estudiante_id, user_id: user_id })
             .populate({
-                path: "song_id",
-                select: "name artists duraction",
+                path: "subtemas_id",
+                select: "name temass duraction",
                 populate: {
-                    path: "artists",
+                    path: "temass",
                     select: "name1 name2 last_name1 last_name2"
                 }
             })
-            .exec(function(err, userListSong) {
+            .exec(function(err, userestudiantesubtemas) {
                 if (err) throw err;
-                res.send({ status: 200, user_list_song: userListSong });
+                res.send({ status: 200, user_estudiante_subtemas: userestudiantesubtemas });
             });
     }
 
-    //CRUD song
-    setSong(song, res) {
-        Song.create(song, function(err, newSong) {
+    //CRUD subtemas
+    setsubtemas(subtemas, res) {
+        subtemas.create(subtemas, function(err, newsubtemas) {
             if (err) throw err;
-            res.send({ status: 200, id_song: newSong._id });
+            res.send({ status: 200, id_subtemas: newsubtemas._id });
         });
     }
-    getSongs(res) {
-        Song.find().exec(function(err, songs) {
+    getsubtemass(res) {
+        subtemas.find().exec(function(err, subtemass) {
             if (err) throw err;
-            res.send({ status: 200, artists: songs });
+            res.send({ status: 200, temass: subtemass });
         });
     }
-    getSong(id, res) {
-        Song.find({ _id: id }).exec(function(err, song) {
+    getsubtemas(id, res) {
+        subtemas.find({ _id: id }).exec(function(err, subtemas) {
             if (err) throw err;
-            res.send({ status: 200, artists: song });
+            res.send({ status: 200, temass: subtemas });
         });
     }
 
-    updateList(song_id, id_user, id_list, res) {
-        List.updateOne({ _id: id_list }, { $push: { song_id: song_id } })
+    updateestudiante(subtemas_id, id_user, id_estudiante, res) {
+        estudiante.updateOne({ _id: id_estudiante }, { $push: { subtemas_id: subtemas_id } })
             .then(rawResponse => {
-                res.send({ message: "List updated", raw: rawResponse });
+                res.send({ message: "estudiante updated", raw: rawResponse });
             })
             .catch(err => {
                 if (err) throw err;
             });
     }
 
-    //CRUD artist
-    setArtist(artist, res) {
-        Artist.create(artist, function(err, newArtist) {
+    //CRUD temas
+    settemas(temas, res) {
+        temas.create(temas, function(err, newtemas) {
             if (err) throw err;
-            res.send({ status: 200, id_artist: newArtist._id });
+            res.send({ status: 200, id_temas: newtemas._id });
         });
     }
 
-    getArtists(res) {
-        Artist.find().exec(function(err, artist) {
+    gettemass(res) {
+        temas.find().exec(function(err, temas) {
             if (err) throw err;
-            res.send({ status: 200, artists: artist });
+            res.send({ status: 200, temass: temas });
         });
     }
 
-    getArtist(id, res) {
-        Artist.find({ _id: id }).exec(function(err, artist) {
+    gettemas(id, res) {
+        temas.find({ _id: id }).exec(function(err, temas) {
             if (err) throw err;
-            res.send({ status: 200, artists: artist });
+            res.send({ status: 200, temass: temas });
         });
     }
 
-    updateSong(song_id, artists, res) {
-        Song.updateOne({ _id: song_id }, { $push: { artists: artists } })
+    updatesubtemas(subtemas_id, temass, res) {
+        subtemas.updateOne({ _id: subtemas_id }, { $push: { temass: temass } })
             .then(rawResponse => {
-                res.send({ message: "Song updated", raw: rawResponse });
+                res.send({ message: "subtemas updated", raw: rawResponse });
             })
             .catch(err => {
                 if (err) throw err;

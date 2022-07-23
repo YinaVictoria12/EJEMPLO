@@ -49,59 +49,59 @@ app.delete("/users/:id", function(req, res) {
     controller.deleteUser(id, res);
 });
 
-app.post("/users/:user_id/lists", (req, res) => {
+app.post("/users/:user_id/estudiantes", (req, res) => {
     let { user_id } = req.params;
-    let { list } = req.body;
-    controller.setUserList(user_id, list, res);
+    let { estudiante } = req.body;
+    controller.setUserestudiante(user_id, estudiante, res);
 });
 
-app.get("/users/:id/lists", function(req, res) {
+app.get("/users/:id/estudiantes", function(req, res) {
     let { id } = req.params;
-    controller.getUserLists(id, res);
+    controller.getUserestudiantes(id, res);
 });
 
-app.get("/users/:user_id/lists/:list_id", (req, res) => {
-    let { user_id, list_id } = req.params;
-    controller.getUserList(user_id, list_id, res);
+app.get("/users/:user_id/estudiantes/:estudiante_id", (req, res) => {
+    let { user_id, estudiante_id } = req.params;
+    controller.getUserestudiante(user_id, estudiante_id, res);
 });
 
-app.post("/songs", (req, res) => {
-    let { song } = req.body;
-    controller.setSong(song, res);
+app.post("/subtemass", (req, res) => {
+    let { subtemas } = req.body;
+    controller.setsubtemas(subtemas, res);
 });
 
-app.get("/songs", (req, res) => {
-    controller.getSongs(res);
+app.get("/subtemass", (req, res) => {
+    controller.getsubtemass(res);
 });
 
-app.get("/songs/:id", (req, res) => {
+app.get("/subtemass/:id", (req, res) => {
     let { id } = req.params;
-    controller.getSong(id, res);
+    controller.getsubtemas(id, res);
 });
-app.put("/users/:id_user/lists/:id_list/", function(req, res) {
-    let { song_id } = req.body;
-    let { id_user, id_list } = req.params;
-    controller.updateList(song_id, id_user, id_list, res);
-});
-
-app.post("/artists/", (req, res) => {
-    let { artist } = req.body;
-    controller.setArtist(artist, res);
+app.put("/users/:id_user/estudiantes/:id_estudiante/", function(req, res) {
+    let { subtemas_id } = req.body;
+    let { id_user, id_estudiante } = req.params;
+    controller.updateestudiante(subtemas_id, id_user, id_estudiante, res);
 });
 
-app.get("/artists/", (req, res) => {
-    controller.getArtists(res);
+app.post("/temass/", (req, res) => {
+    let { temas } = req.body;
+    controller.settemas(temas, res);
 });
 
-app.get("/artists/:id", (req, res) => {
+app.get("/temass/", (req, res) => {
+    controller.gettemass(res);
+});
+
+app.get("/temass/:id", (req, res) => {
     let { id } = req.params;
-    controller.getArtist(id, res);
+    controller.gettemas(id, res);
 });
 
-app.put("/songs/:id_song/", function(req, res) {
-    let { id_song } = req.params;
-    let { artists } = req.body;
-    controller.updateSong(id_song, artists, res);
+app.put("/subtemass/:id_subtemas/", function(req, res) {
+    let { id_subtemas } = req.params;
+    let { temass } = req.body;
+    controller.updatesubtemas(id_subtemas, temass, res);
 });
 
 exports.app = app;

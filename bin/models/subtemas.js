@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const SongSchema = new Schema({
+const subtemasSchema = new Schema({
   name: String,
   duraction: String,
-  artists: [
+  temass: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Artist"
+      ref: "temas"
     }
   ],
-  list_id: [
+  estudiante_id: [
     {
       type: Schema.Types.ObjectId,
-      ref: "List"
+      ref: "estudiante"
     }
   ]
 });
 
-var Song = mongoose.model("Song", SongSchema);
-module.exports = Song;
+var subtemas = mongoose.model("subtemas", subtemasSchema);
+module.exports = subtemas;

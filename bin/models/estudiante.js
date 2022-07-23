@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ListSchema = new Schema({
+const estudianteSchema = new Schema({
   name: String,
   descripcion: String,
   gender: String,
@@ -9,13 +9,13 @@ const ListSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
-  song_id: [
+  subtemas_id: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Song"
+      ref: "subtemas"
     }
   ]
 });
 
-var List = mongoose.model("List", ListSchema);
-module.exports = List;
+var estudiante = mongoose.model("estudiante", estudianteSchema);
+module.exports = estudiante;

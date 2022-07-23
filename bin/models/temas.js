@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ArtistSchema = new Schema({
+const temasSchema = new Schema({
   name1: String,
   name2: String,
   last_name1: String,
   last_name2: String,
-  songs: [
+  subtemass: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Song"
+      ref: "subtemas"
     }
   ]
 });
 
-var Artist = mongoose.model("Artist", ArtistSchema);
-module.exports = Artist;
+var temas = mongoose.model("temas", temasSchema);
+module.exports = temas;
